@@ -2,8 +2,8 @@
   <div id="topbar">
       <div class="topLogo">Resumer</div>
       <div class="topAction">
-        <button>注册</button>
-        <button>登录</button>
+        <el-button>注册</el-button>
+        <el-button type="primary">登录</el-button>
       </div>
   </div>
 </template>
