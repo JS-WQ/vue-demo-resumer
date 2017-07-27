@@ -22,96 +22,31 @@
       </li>
       -->
       <li v-bind:class="{active:currentTab === 0}">
-          <h2>身份信息</h2>
-          <el-form>
-            <el-form-item label="姓名">
-              <el-input v-model="profile.name"></el-input>
-            </el-form-item>
-            <el-form-item label="城市">
-              <el-input v-model="profile.city"></el-input>
-            </el-form-item>
-            <el-form-item label="生日">
-              <el-input v-model="profile.birth"></el-input>
-            </el-form-item>
-        </el-form>
+          <PersonalData v-bind:profile="profile"/>
       </li>
       <li v-bind:class="{active:currentTab === 1}">
-        <h2>工作经历</h2>
-        <el-form>
-          <div class="workcontents"v-for="(work,index) in WorkExperience">
-            <el-form-item label="公司">
-              <el-input v-model="work.company"></el-input>
-            </el-form-item>
-            <el-form-item label="工作内容">
-              <el-input v-model="work.jobContent"></el-input>
-            </el-form-item>
-            <i class="el-icon-circle-close" v-on:click="removeWorkExperience(index)"></i>
-          </div>
-
-          <el-button v-on:click="addWorkExperience">新建一个</el-button>
-        </el-form>
+          <ArrayEdit v-bind:items="WorkExperience" v-bind:labels="{company:'公司',jobContent:'工作经历'}" title="工作经历"/>
       </li>
       <li v-bind:class="{active:currentTab === 2}">
-        <h2>学习经历</h2>
-        <el-form>
-            <el-form-item label="名称">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动形式">
-              <el-input></el-input>
-            </el-form-item>
-          </el-form>      
+          <ArrayEdit v-bind:items="StudyExperience" v-bind:labels="{school:'学校',time:'在校时间',degree:'学位'}" title="学习经历"/>
       </li>
       <li v-bind:class="{active:currentTab === 3}">
-        <h2>完成项目</h2>
-        <el-form>
-            <el-form-item label="名称">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动形式">
-              <el-input></el-input>
-            </el-form-item>
-          </el-form>
+          <ArrayEdit v-bind:items="Projects" v-bind:labels="{name:'项目名称',contents:'项目介绍'}" title="项目经历"/>
       </li>
       <li v-bind:class="{active:currentTab === 4}">
-        <h2>获奖情况</h2>
-        <el-form>
-            <el-form-item label="名称">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动形式">
-              <el-input></el-input>
-            </el-form-item>
-          </el-form>
+          <ArrayEdit v-bind:items="Awards" v-bind:labels="{time:'获奖时间',contents:'获奖经历'}" title="获奖经历"/>        
       </li>
       <li v-bind:class="{active:currentTab === 5}">
-        <h2>联系方式</h2>
-        <el-form>
-            <el-form-item label="名称">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域">
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item label="活动形式">
-              <el-input></el-input>
-            </el-form-item>
-          </el-form>
+          <ArrayEdit v-bind:items="telephone" v-bind:labels="{phone:'手机',mail:'邮箱',adress:'地址',QQ:'QQ',wechat:'微信'}" title="联系方式"/>                  
       </li>
     </ol>
   </div>
 </template>
 <script>
+  import PersonalData from './PersonalData'
+  import ArrayEdit from './ArrayEdit'
   export default {
+    components:{ PersonalData,ArrayEdit },
     data(){
       return {
         currentTab:0,
@@ -123,16 +58,23 @@
         },
         WorkExperience:[
           {company:'',jobContent:''}
+        ],
+        StudyExperience:[
+          {school:'',time:'',degree:''}
+        ],
+        Projects:[  
+          {name:'',contents:''}
+        ],
+        Awards:[
+          {time:'',contents:''}
+        ],
+        telephone:[
+          {phone:'',QQ:'',wechat:'',mail:'',adress:''}
         ]
       }
     },
     methods:{
-      addWorkExperience(){
-        this.WorkExperience.push({company:'',content:''})
-      },
-      removeWorkExperience(index){
-        this.WorkExperience.splice(index,1)
-      }
+      
     }
 
   }
@@ -170,7 +112,7 @@
           &.active{
             display: block;
           }
-          .workcontents{
+          .contents{
             position: relative;
             .el-icon-circle-close{
               position: absolute;
@@ -178,6 +120,7 @@
               right: 0;
             }
           }
+         
         }
       }
   }
