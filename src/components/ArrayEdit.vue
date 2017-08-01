@@ -4,11 +4,11 @@
     <el-form>
       <div class="contents" v-for="(item,index) in items" v-bind:key="index">
         <el-form-item v-for="key in keys" v-bind:label="labels[key]" v-bind:key="key" >
-          <el-input v-model="item.key"></el-input>
+          <el-input v-model="item[key]"></el-input>
         </el-form-item>
-        <i class="el-icon-circle-close" v-on:click="removeitem(index)"></i>
+        <i class="el-icon-circle-close" v-on:click="removeitem(index)" v-if="title !='联系方式'"></i>
       </div>
-      <el-button v-on:click="additem" >新建一个</el-button>
+      <el-button v-on:click="additem" v-if="title !='联系方式'">新建一个</el-button>
     </el-form>
   </div>
 </template>

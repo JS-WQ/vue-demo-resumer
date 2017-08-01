@@ -22,22 +22,22 @@
       </li>
       -->
       <li v-bind:class="{active:currentTab === 0}">
-          <PersonalData v-bind:profile="profile"/>
+          <PersonalData v-bind:profile="resume.profile"/>
       </li>
       <li v-bind:class="{active:currentTab === 1}">
-          <ArrayEdit v-bind:items="WorkExperience" v-bind:labels="{company:'公司',jobContent:'工作经历'}" title="工作经历"/>
+          <ArrayEdit v-bind:items="resume.WorkExperience" v-bind:labels="{company:'公司',jobContent:'工作经历'}" title="工作经历"/>
       </li>
       <li v-bind:class="{active:currentTab === 2}">
-          <ArrayEdit v-bind:items="StudyExperience" v-bind:labels="{school:'学校',time:'在校时间',degree:'学位'}" title="学习经历"/>
+          <ArrayEdit v-bind:items="resume.StudyExperience" v-bind:labels="{school:'学校',time:'在校时间',degree:'学位'}" title="学习经历"/>
       </li>
       <li v-bind:class="{active:currentTab === 3}">
-          <ArrayEdit v-bind:items="Projects" v-bind:labels="{name:'项目名称',contents:'项目介绍'}" title="项目经历"/>
+          <ArrayEdit v-bind:items="resume.Projects" v-bind:labels="{name:'项目名称',contents:'项目介绍'}" title="项目经历"/>
       </li>
       <li v-bind:class="{active:currentTab === 4}">
-          <ArrayEdit v-bind:items="Awards" v-bind:labels="{time:'获奖时间',contents:'获奖经历'}" title="获奖经历"/>        
+          <ArrayEdit v-bind:items="resume.Awards" v-bind:labels="{time:'获奖时间',contents:'获奖经历'}" title="获奖经历"/>        
       </li>
       <li v-bind:class="{active:currentTab === 5}">
-          <ArrayEdit v-bind:items="telephone" v-bind:labels="{phone:'手机',mail:'邮箱',adress:'地址',QQ:'QQ',wechat:'微信'}" title="联系方式"/>                  
+          <ArrayEdit v-bind:items="resume.telephone" v-bind:labels="{phone:'手机',mail:'邮箱',adress:'地址',QQ:'QQ',wechat:'微信'}" title="联系方式"/>                  
       </li>
     </ol>
   </div>
@@ -47,30 +47,12 @@
   import ArrayEdit from './ArrayEdit'
   export default {
     components:{ PersonalData,ArrayEdit },
+    props:['resume'],
     data(){
       return {
         currentTab:0,
         icons:['shenfenzheng','gongzuo','book-empty','xiangmu2','jiangbei','09dianhua'],
-        profile:{
-          name:'',
-          city:'',
-          birth:''
-        },
-        WorkExperience:[
-          {company:'',jobContent:''}
-        ],
-        StudyExperience:[
-          {school:'',time:'',degree:''}
-        ],
-        Projects:[  
-          {name:'',contents:''}
-        ],
-        Awards:[
-          {time:'',contents:''}
-        ],
-        telephone:[
-          {phone:'',QQ:'',wechat:'',mail:'',adress:''}
-        ]
+        
       }
     },
     methods:{
